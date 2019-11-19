@@ -1,18 +1,20 @@
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Random;
-import java.util.TimeZone;
-import java.util.concurrent.Semaphore;
 
 public class Turtle extends Thread implements Serializable, Runnable {
     private static final long serialVersionUID = -539960512249039L;
 
     private String name;
     private int dorsal;
-    private boolean metaAlcanzada = false;
     private HandleRunning handleRunning;
 
     public Turtle(String name, int dorsal){
+        this.name = name;
+        this.dorsal = dorsal;
+    }
+
+    public Turtle(String name, int dorsal, boolean b){
         this.name = name;
         this.dorsal = dorsal;
         Thread t = new Thread(this);
@@ -39,18 +41,16 @@ public class Turtle extends Thread implements Serializable, Runnable {
 
         while (handleRunning.getCarreraEnMarcha())
         {
-            Thread.sleep(5);
+            Thread.sleep(5);                //hacemos una pausa mínima
             int recorrido = random.nextInt(9) + 1;
             positionRun += recorrido;
-                System.out.println(this.name + "   está en : " + positionRun + " timer: " + System.currentTimeMillis());
+               // System.out.println(this.name + "   está en : " + positionRun + " timer: " + System.currentTimeMillis());
             if (positionRun >= 500) {
                     this.handleRunning.setGanador(this);
-                   // metaAlcanzada = true;
             }
-
         }
         this.join();
-
+        this.handleRunning = null;
     }
 
 
@@ -63,8 +63,6 @@ public class Turtle extends Thread implements Serializable, Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 }
 

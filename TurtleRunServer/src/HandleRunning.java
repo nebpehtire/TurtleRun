@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Vector;
 
 public class HandleRunning extends Thread{
@@ -21,8 +20,21 @@ public class HandleRunning extends Thread{
     }
 
     public HandleRunning(Vector<Turtle> vector){
-        this.vector = vector;
-        Thread t = new Thread(this);
+
+        //todo tenemos problemas por el tipo de objetos turtle que mandamos...
+        // no se ha solucionado haciendo copia del vector así que creo un nuevo vector
+        // que es el que se usará para la carrera y NO modificar el vector de carrera
+        // futuro: cambiar el handle y crear una clase que sea la que tenga el thread
+        // tortugaEnCarrera por ejemplo
+        Vector<Turtle> nuevoVector = new Vector<Turtle>();
+        //rellenamos con los datos de vector haciendo una copia
+        for (int i = 0; i < vector.size(); i++)
+        {
+            nuevoVector.add(new Turtle(vector.elementAt(i).getNameTurtle(), vector.elementAt(i).getDorsal(), true));
+
+        }
+        this.vector = nuevoVector;
+
     }
 
 
@@ -33,8 +45,6 @@ public class HandleRunning extends Thread{
             this.ganador = turtle;
             primerGanador = true;
 
-            //enviamos mensaje del ganador
-            //System.out.println("Ha ganado: " + turtle.getNameTurtle());
             server.sendWinnerMessager(turtle);
         }
 
@@ -48,16 +58,9 @@ public class HandleRunning extends Thread{
         carreraEnMarcha = true;
         for (int i = 0; i < vector.size(); i++)
         {
-           // vector.elementAt(i).setSemaforoFinalizado(semaforoFinalizado);
-           // vector.elementAt(i).setSemaforoIniciarCarrera(semaforoInicializarCarrera);
-            //vector.elementAt(i).run();
             vector.elementAt(i).setHandleRunning(this);
             vector.elementAt(i).start();
         }
         carreraEnMarchaVolatile = true;
-
-
-
-        //return 0;
     }
 }

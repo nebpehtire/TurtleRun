@@ -153,6 +153,7 @@ public class TurtleRun {
                 }
                 pintamosVector(vt);
             } catch (Exception e){
+                System.out.println("por qué estoy aquí?");
             }
 
         } catch (Exception e) {

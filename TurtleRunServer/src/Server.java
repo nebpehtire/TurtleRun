@@ -40,6 +40,7 @@ public class Server {
             boolean connected = true;
 
             do {
+                System.out.println("Esperando objeto de opciones de cliente - time=" + System.currentTimeMillis());
                 InputStream inputStream = socket.getInputStream();
                 ObjectInputStream is = new ObjectInputStream(inputStream);
                 try {
@@ -108,6 +109,7 @@ public class Server {
         //DataOutputStream clienteT = new DataOutputStream(socket.getOutputStream());
         //cliente espera lancemos el vector de tortugas
         ObjectOutputStream clienteVector = new ObjectOutputStream(socket.getOutputStream());
+       // System.out.println(vectorTurtles.elementAt(0));
         clienteVector.writeObject(vectorTurtles);
         //si el vector está vacío no esperaremos que nos manden nada
         if (vectorTurtles.size() == 0)
@@ -141,20 +143,30 @@ public class Server {
         ObjectOutputStream clienteVector = new ObjectOutputStream(socket.getOutputStream());
         clienteVector.writeObject(vectorTurtles);
     }
-    private void optionFour()
-    {
-        /*
-        * crear un hilo para cada tortuga
-        * ¿crear un handlerun para tenerlo ordenado ?
-        *
-        *
-        * */
-        HandleRunning hr = new HandleRunning(vectorTurtles);
-        hr.setServer(this);
-       // System.out.println(hr.carrera());
-        hr.carrera();
+    private void optionFour() throws IOException {
+        // si num de tortugas <= 1 => debemos indicar que no se puede iniciar una carera
 
+        if (vectorTurtles.size() <= 1)
+        {
+            DataOutputStream clienteT = new DataOutputStream(socket.getOutputStream());
+            cliente.writeUTF("No hay tortugas suficientes para iniciar una carera.\n");
 
+        } else {
+            /*
+             * crear un hilo para cada tortuga
+             * ¿crear un handlerun para tenerlo ordenado ?
+             *
+             *
+             * */
+
+            Vector<Turtle> copiaVectorTurtle = (Vector<Turtle>) vectorTurtles.clone();
+            //HandleRunning hr = new HandleRunning(vectorTurtles);
+            HandleRunning hr = new HandleRunning(copiaVectorTurtle);
+            hr.setServer(this);
+            // System.out.println(hr.carrera());
+            hr.carrera();
+
+        }
     }
 
     public void sendWinnerMessager(Turtle turle) throws IOException {

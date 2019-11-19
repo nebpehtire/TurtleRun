@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3f766aff-6791-4c56-b382-7e313aa83e43" name="Default Changelist" comment="" />
+    <list default="true" id="3f766aff-6791-4c56-b382-7e313aa83e43" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/.idea/src.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TurtleRun/META-INF/TurtleRun.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TurtleRun/TurtleRun.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TurtleRun/TurtleRun.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TurtleRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TurtleRun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/HandleRunning.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/HandleRunning.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/META-INF/ServerTurtleRun.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/Turtle.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/Turtle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/src/HandleRunning.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/src/HandleRunning.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/src/Turtle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/src/Turtle.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +30,14 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1Ta2qk04Zwje15dhPUdu1HP5ry4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunDashboard">
@@ -57,5 +78,16 @@
       <updated>1573684078858</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

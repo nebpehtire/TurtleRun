@@ -6,6 +6,10 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.Vector;
 
+
+/**
+ * Conecta con el servidor en puerto 60000 por defecto
+ */
 public class TurtleRun {
 
     //declaramos las variables
@@ -19,6 +23,10 @@ public class TurtleRun {
     private static Scanner reader = new Scanner(System.in);
 
 
+    /**
+     * Inicio de la conexión
+     * @throws IOException
+     */
     public TurtleRun() throws IOException
     {
         try {
@@ -43,6 +51,10 @@ public class TurtleRun {
     }
 
 
+    /**
+     * Pasada una opción derivamos a función correcta
+     * @param opcion
+     */
     private void opcionElegida(int opcion)
     {
         switch (opcion)
@@ -68,6 +80,13 @@ public class TurtleRun {
         }
     }
 
+    /**
+     * Seleccionado Añadir
+     * Solicitamos nombre
+     * Solicitamos dorsal  : comprobamos sea integer
+     * Enviamos datos como objeto
+     * esperamos respuesta del server
+     */
     private void choicedOne(){
         System.out.println("Introduce el nombre de la Tortuga:");
         String newName = reader.nextLine();
@@ -81,7 +100,7 @@ public class TurtleRun {
             ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
             outStream.writeObject(hc);
             DataInputStream entradaCliente = new DataInputStream(socket.getInputStream());
-            System.out.println(entradaCliente.readUTF());
+            System.out.println(entradaCliente.readUTF() + "\n");
         } catch (Exception e) {
             //manejamos la excepction
             System.out.println(e);
@@ -89,7 +108,14 @@ public class TurtleRun {
     }
 
 
-
+    /**
+     * Seleccionado eliminar
+     * recepcionamos objeto vector < turtle >
+     *     mostramos las tortugas
+     *     preguntamos elemento a eliminar
+     *     enviamos mensaje de eliminación
+     *     esperamos mensaje del server
+     */
     private void choicedTwo(){
         HandleOptionConnection hc = new HandleOptionConnection(2);
         try {
@@ -134,6 +160,14 @@ public class TurtleRun {
 
 
     }
+
+
+    /**
+     * Seleccionado mostrar tortugas
+     * Recepcionamos objeto vector de tortugas
+     * TODO separarlo pues es proceso ya hecho en el anterior
+     * mostramos las tortugas
+     */
     private void choicedThree()
     {
         HandleOptionConnection hc = new HandleOptionConnection(3);
@@ -148,7 +182,7 @@ public class TurtleRun {
             {
                 Vector<Turtle> vt = (Vector<Turtle>)ois.readObject();
                 if (vt.size() == 0) {
-                    System.out.println("No hay tortugas para pintar");
+                    System.out.println("No hay tortugas para mostrar\n");
                     return;
                 }
                 pintamosVector(vt);
@@ -164,6 +198,11 @@ public class TurtleRun {
 
 
     }
+
+    /**
+     * Seleccionado Iniciar Carrera
+     * Esperamos respuesta del servidor
+     */
     private void choicedFour(){
         HandleOptionConnection hc = new HandleOptionConnection(4);
         try
@@ -177,6 +216,13 @@ public class TurtleRun {
 
     }
 
+
+    /**
+     * Integer para eliminación de un elemento
+     *
+     * @param cantidad
+     * @return
+     */
     private static int devolvemosIntegerDeDimensionDeVector(int cantidad)
     {
         Integer decision = 0;
@@ -201,6 +247,9 @@ public class TurtleRun {
         return (decision - 1);
     }
 
+    /**
+     * @return solo puede devolver número entero positivo introducido por el usuario
+     */
     private static int devolvemosIngegerDeReaderDorsal(){
         Integer decision = 0;
         boolean exit = false;
@@ -219,6 +268,10 @@ public class TurtleRun {
         return  decision;
     }
 
+
+    /**
+     * @return devuelve entero entre 1 y 5 para el menú principal
+     */
     private static int devolvemosIntegerDeReaderMenuPrincipal()
     {
         Integer decision = 0;
@@ -236,7 +289,7 @@ public class TurtleRun {
                         exit = true;
                 } catch (Exception e){
                     System.out.println("Introduce un número entero entre 1 y 5" +
-                            "\n-----------------------------------------------");
+                            "\n-----------------------------------------------\n");
 
                     preguntamosOpciones();
                 }
@@ -244,15 +297,23 @@ public class TurtleRun {
         return decision;
     }
 
+    /**
+     * Mostramos las opciones disponibles
+     */
     private static void preguntamosOpciones()
     {
-        System.out.println("1. Introducir nueva tortuga" +
+        System.out.println("Opciones disponibles:" +
+                "\n1. Introducir nueva tortuga" +
                 "\n2. Eliminar una tortuga" +
                 "\n3. Mostrar tortugas" +
                 "\n4. Iniciar carrera" +
-                "\n5. Salir.");
+                "\n5. Salir.\n");
     }
 
+    /**
+     * Cerramos el programa mandando mensaje al servidor para que cierre
+     *
+     */
     private void closeTurtleRun() {
 
 
@@ -267,11 +328,15 @@ public class TurtleRun {
 
 
 
-        System.out.println("Gracias por ponerme un 10.......  :)");
+        System.out.println("Gracias por ponerme un 10.......  :)");    //easter egg
         exitMenu = true;
     }
 
 
+    /**
+     * Pinta en pantalla todos los elementos del vector de tortugas
+     * @param vectorTurtles
+     */
     private static void pintamosVector(Vector<Turtle> vectorTurtles)
     {
         System.out.println("Listado de Tortugas\n- - - - - - - - - - - - -");
@@ -280,7 +345,7 @@ public class TurtleRun {
         }
         if (vectorTurtles.size() == 0)
             System.out.println("No se ha inscrito ninguna tortuga a esta gran carrera..... :(");
-        System.out.println("- - - - - - - - - - - - -");
+        System.out.println("- - - - - - - - - - - - -\n");
 
     }
 

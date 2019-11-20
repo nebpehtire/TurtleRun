@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * Clase Tortuga
+ */
 public class Turtle extends Thread implements Serializable, Runnable {
     private static final long serialVersionUID = -539960512249039L;
 
@@ -9,14 +12,25 @@ public class Turtle extends Thread implements Serializable, Runnable {
     private int dorsal;
     private HandleRunning handleRunning;
 
+    /**
+     * Constructor inicial para comunicación con el cliente
+     * @param name
+     * @param dorsal
+     */
     public Turtle(String name, int dorsal){
         this.name = name;
         this.dorsal = dorsal;
     }
 
-    public Turtle(String name, int dorsal, boolean b){
+    /** Constructor para el HandleRunning
+     * @param name
+     * @param dorsal
+     * @param handleRunning
+     */
+    public Turtle(String name, int dorsal, HandleRunning handleRunning){
         this.name = name;
         this.dorsal = dorsal;
+        this.handleRunning = handleRunning;
         Thread t = new Thread(this);
         t.start();
     }
@@ -30,11 +44,12 @@ public class Turtle extends Thread implements Serializable, Runnable {
         return this.dorsal;
     }
 
-    public void setHandleRunning(HandleRunning handleRunning)
-    {
-        this.handleRunning = handleRunning;
-    }
 
+    /**
+     * Movimiento de las tortugas
+     * @throws InterruptedException
+     * @throws IOException
+     */
     private void carreraHastaMeta() throws InterruptedException, IOException {
         int positionRun = 0;
         Random random = new Random();
@@ -49,8 +64,6 @@ public class Turtle extends Thread implements Serializable, Runnable {
                     this.handleRunning.setGanador(this);
             }
         }
-        this.join();
-        this.handleRunning = null;
     }
 
 
@@ -58,6 +71,7 @@ public class Turtle extends Thread implements Serializable, Runnable {
     public void run(){
         try
         {
+            /** OJO: while para esperar que todos los hilos estén creados **/
             while (!handleRunning.carreraEnMarchaVolatile){}
             carreraHastaMeta();
         } catch (Exception e) {

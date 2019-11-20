@@ -11,9 +11,6 @@ public class Server {
     private DataOutputStream cliente;
     private boolean connected = false;
 
-
-
-
     //usaré un vector pues es más fácil de añadir/quitar/redimensionar
     private static Vector<Turtle> vectorTurtles = new Vector<Turtle>();
 
@@ -23,12 +20,13 @@ public class Server {
         System.out.println("Inicializando servidor de TurtleRun");
         srvSocket = new ServerSocket(PORT);
         socket = new Socket();
-
-
-
     }
 
 
+    /**
+     * Inicia el servidor
+     * @throws IOException
+     */
     public void iniciarServer() throws IOException
     {
 
@@ -50,15 +48,18 @@ public class Server {
                 } catch (Exception e){
                     cliente = new DataOutputStream(socket.getOutputStream());
                     cliente.writeUTF("Ha ocurrido un error al manejar el objeto HandleOptionConnection");
+                    System.out.println("Error manejando el HandleOptionConnection enviado. - time = " + System.currentTimeMillis());
                 }
             } while (connected);
-
-
 
         }
 
     }
 
+    /**
+     * @param hc parametro enviado por el cliente
+     * @throws IOException
+     */
     private void optionsHandle(HandleOptionConnection hc) throws IOException {
         switch (hc.opcion)
         {
@@ -78,21 +79,30 @@ public class Server {
                 optionClose();
                 break;
             default:
-                System.out.println("Ha ocurrido un error en la opcion de HandleOptionConnection");
+                System.out.println("Ha ocurrido un error en la opcion de HandleOptionConnection - time: " + System.currentTimeMillis());
                 break;
         }
     }
 
+    /**
+     * Cierra el servidor
+     * @throws IOException
+     */
     private void optionClose() throws IOException {
+        System.out.println("Se inicia apagado del servidor - time = " + System.currentTimeMillis());
         cliente = new DataOutputStream(socket.getOutputStream());
         cliente.writeUTF("Se está apagando el servidor, ¡Hasta otra!");
-        System.out.println("Apagando el servidor");
         connected = false;
         socket.close();
         srvSocket.close();
         System.exit(0);
     }
 
+    /**
+     * Añade el turtle y responde al cliente
+     * @param turtle
+     * @throws IOException
+     */
     private void optionOne(Turtle turtle) throws IOException {
 
         //TODO habría que verificar si se ha usado el mismo dorsal
@@ -100,23 +110,26 @@ public class Server {
         vectorTurtles.add(turtle);
         DataOutputStream clienteT = new DataOutputStream(socket.getOutputStream());
         clienteT.writeUTF("se ha creado la tortuga:" + turtle.getNameTurtle() + " con el dorsal:" + turtle.getDorsal());
+        System.out.println("Se ha añadido una tortuga. - time = " + System.currentTimeMillis());
         pintamosVector();
     }
 
 
+    /**
+     * Envía listado al cliente
+     * Espera respuesta y elimina el objeto deseado
+     * @throws IOException
+     */
     private void optionTwo() throws  IOException {
         System.out.println("Ha seleccionado la opción de eliminar tortugas.");
-        //DataOutputStream clienteT = new DataOutputStream(socket.getOutputStream());
         //cliente espera lancemos el vector de tortugas
         ObjectOutputStream clienteVector = new ObjectOutputStream(socket.getOutputStream());
-       // System.out.println(vectorTurtles.elementAt(0));
         clienteVector.writeObject(vectorTurtles);
         //si el vector está vacío no esperaremos que nos manden nada
         if (vectorTurtles.size() == 0)
             return;
         System.out.println(vectorTurtles.size());
         //si el vector tiene objetos esperamos elección del cliente
-        //InputStream inputStream = socket.getInputStream();
         ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
 
         //casteamos a handleoptionconnection
@@ -128,6 +141,7 @@ public class Server {
 
             if (hc.toDelete == true)
             {
+                System.out.println("Se elimina la Tortuga " + hc.positionVectorToDelete + " - time = " + System.currentTimeMillis());
                 vectorTurtles.removeElementAt(hc.positionVectorToDelete);
                 DataOutputStream clienteT = new DataOutputStream(socket.getOutputStream());
                 clienteT.writeUTF("Se ha eliminado la tortuga.");
@@ -138,11 +152,24 @@ public class Server {
 
         }
     }
+
+
+    /**
+     * Envia el vector tortugas al cliente
+     * @throws IOException
+     */
     private void optionThree() throws IOException{
-        System.out.println("Ha seleccionado la opción de mostrar tortugas  ---> enviamos vector.");
+        System.out.println("Seleccionado Mostrar Tortugas  ---> enviamos vector. - time = " + System.currentTimeMillis());
         ObjectOutputStream clienteVector = new ObjectOutputStream(socket.getOutputStream());
         clienteVector.writeObject(vectorTurtles);
     }
+
+
+    /**
+     * verifica cuántas tortugas hay
+     * si es mayor de 1 inicia la carrera
+     * @throws IOException
+     */
     private void optionFour() throws IOException {
         // si num de tortugas <= 1 => debemos indicar que no se puede iniciar una carera
 
@@ -150,30 +177,34 @@ public class Server {
         {
             DataOutputStream clienteT = new DataOutputStream(socket.getOutputStream());
             cliente.writeUTF("No hay tortugas suficientes para iniciar una carera.\n");
+            System.out.println("Intentan iniciar carrera sin tortugas suficientes - time = " + System.currentTimeMillis());
 
         } else {
-            /*
-             * crear un hilo para cada tortuga
-             * ¿crear un handlerun para tenerlo ordenado ?
-             *
-             *
-             * */
 
-            Vector<Turtle> copiaVectorTurtle = (Vector<Turtle>) vectorTurtles.clone();
-            //HandleRunning hr = new HandleRunning(vectorTurtles);
-            HandleRunning hr = new HandleRunning(copiaVectorTurtle);
+
+            HandleRunning hr = new HandleRunning(vectorTurtles);
             hr.setServer(this);
-            // System.out.println(hr.carrera());
             hr.carrera();
-
         }
     }
 
+
+    /**
+     * Se envia mensaje al cliente indicando la tortuga ganadora
+     * @param turle
+     * @throws IOException
+     */
     public void sendWinnerMessager(Turtle turle) throws IOException {
         DataOutputStream clienteT = new DataOutputStream(socket.getOutputStream());
         clienteT.writeUTF("Ha ganado la tortuga " + turle.getNameTurtle() + " con el Dorsal: " + turle.getDorsal());
+        System.out.println("Enviados datos de tortuga ganadora- time = " + System.currentTimeMillis());
     }
 
+
+    /**
+     * Muestra los datos del vector de tortugas
+     * si no hay tortugas lo indica
+     */
     private static void pintamosVector()
     {
         System.out.println("Listado de Tortugas\n- - - - - - - - - - - - -");

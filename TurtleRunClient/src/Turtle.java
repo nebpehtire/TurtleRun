@@ -1,5 +1,8 @@
 import java.io.Serializable;
 
+/**
+ * Clase Tortuga básica
+ */
 public class Turtle implements Serializable {
     private static final long serialVersionUID = -539960512249039L;
 
@@ -11,7 +14,7 @@ public class Turtle implements Serializable {
         this.dorsal = dorsal;
     }
 
-    //solo creo getters pues no está indicado que se pueda modificar variables
+    //solo creo getters pues no está previsto modificación
     public String getName()
     {
         return this.name;

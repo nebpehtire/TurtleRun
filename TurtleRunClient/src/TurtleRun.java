@@ -13,7 +13,7 @@ import java.util.Vector;
 public class TurtleRun {
 
     //declaramos las variables
-    private final int PORT = 60000;
+    private final int PORT = 1;
     private final String HOST = "localhost";   //apuntamos a la propia máquina pues el server está en local
     private Socket socket;
     private static boolean exitMenu = false;
@@ -36,6 +36,16 @@ public class TurtleRun {
         }
 
 
+    }
+
+    public TurtleRun(int puerto)
+    {
+        try
+        {
+            socket = new Socket(HOST, puerto);
+        } catch (Exception e) {
+            System.out.println("Algo ha ido mal");
+        }
     }
 
     public void iniciarCliente()

@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class Server {
     // declaramos las variables
-    private final int PORT = 60000;      //puerto del server TODO añadir opción de elegir puerto??
+    private final int PORT = 60000;      //puerto del server por defecto (usaremos la pregunta al usuario)
     private static ServerSocket srvSocket;      // Socket del server
     private Socket socket;              // Socket del cliente
     private DataOutputStream cliente;
@@ -20,6 +20,13 @@ public class Server {
         System.out.println("Inicializando servidor de TurtleRun");
         srvSocket = new ServerSocket(PORT);
         socket = new Socket();
+    }
+
+    public Server(int puerto) throws  IOException {
+        System.out.println("Inicializando servidor de TurtleRun");
+        srvSocket = new ServerSocket(puerto);
+        socket = new Socket();
+
     }
 
 

@@ -3,19 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3f766aff-6791-4c56-b382-7e313aa83e43" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HandleOptionConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HandleOptionConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainTurtleRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainTurtleRun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Turtle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Turtle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TurtleRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TurtleRun.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TurtleRunServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/HandleRunning.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/HandleRunning.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/Turtle.class" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/out/production/ServerTurtleRun/Turtle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/src/HandleOptionConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/src/HandleOptionConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/src/HandleRunning.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/src/HandleRunning.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TurtleRunServer/src/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/src/MainServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TurtleRunServer/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/src/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TurtleRunServer/src/Turtle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TurtleRunServer/src/Turtle.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +77,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
